@@ -1,4 +1,4 @@
-job "jenkins" {
+job "jenkins-beta" {
   type = "service"
     datacenters = ["lhr-armhf"]
     update {
