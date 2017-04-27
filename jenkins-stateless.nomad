@@ -72,7 +72,7 @@ job "jenkins" {
         command = "setup_jenkins.sh"
       }
       artifact {
-        source = "http://githubwhateva.com/"
+        source = "https://raw.githubusercontent.com/ncorrare/jenkins-stateless/master/setup_jenkins.sh"
         options {
           checksum = "sha256:0373d92ede83ab4d5dd5136d0bd9570198b5626fc6bd7d0f55d7b989395b25ba"
         }
