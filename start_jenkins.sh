@@ -2,7 +2,7 @@
 
 curl -o vault.zip https://releases.hashicorp.com/vault/0.7.0/vault_0.7.0_linux_arm.zip ; yes | unzip vault.zip
 GITHUB_PAN=$(./vault read -field=pan secret/github)
-JENKINS_HOME=/local
+JENKINS_HOME=/local/jenkins
 JENKINS_ARGS="--httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT"
 JENKINS_ARGS="$JENKINS_ARGS --preferredClassLoader=java.net.URLClassLoader"
 VERSION=${JENKINS_VERSION:-"2.46.2"}
