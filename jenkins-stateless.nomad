@@ -15,20 +15,23 @@ job "jenkins-beta" {
      }
     task "frontend" {
       env {
-        JENKINS_HOME = "/local"
-        JENKINS_SLAVE_AGENT_PORT = 5050
+        HTTP_PORT = 8087
       }
-      driver = "java"
+      vault {
+        policies = ["github", "default"]
+
+        change_mode   = "noop"
+      }
+      driver = "exec"
       config {
-        jar_path    = "local/jenkins.war"
-        jvm_options = ["-Xmx768m", "-Xms384m"]
-        args        = ["--httpPort=8080"]
+        command  = "/bin/bash"
+        args     = ["local/start_jenkins.sh"]
       }
       artifact {
-        source = "http://ftp-chi.osuosl.org/pub/jenkins/war-stable/2.46.2/jenkins.war"
+        source = "https://raw.githubusercontent.com/ncorrare/jenkins-stateless/master/start_jenkins.sh"
 
         options {
-          checksum = "sha256:aa7f243a4c84d3d6cfb99a218950b8f7b926af7aa2570b0e1707279d464472c7"
+          checksum = "sha256:97ab7d9ae31e2fde9fbf4f033d917d401f7c96222be9dbf607879b5d6bd0bcfe"
         }
       }
       service {
@@ -49,16 +52,16 @@ job "jenkins-beta" {
 # Specify the maximum resources required to run the job,
 # include CPU, memory, and bandwidth.
       resources {
-          cpu    = 2400 # MHz
-          memory = 768 # MB
+          cpu    = 1200 # MHz
+          memory = 384 # MB
           network {
-            mbits = 100
+            mbits = 20
 
 # This requests a dynamic port named "http". This will
 # be something like "46283", but we refer to it via the
 # label "http".
             port "http" {
-                static = 8080
+                static = 8087
             }
             port "slave" {
               static = 5050
@@ -66,17 +69,5 @@ job "jenkins-beta" {
           }
         }
       }
-    task "provisioner" {
-      driver = "exec"   
-      config {
-        command = "setup_jenkins.sh"
-      }
-      artifact {
-        source = "https://raw.githubusercontent.com/ncorrare/jenkins-stateless/master/setup_jenkins.sh"
-        options {
-          checksum = "sha256:0373d92ede83ab4d5dd5136d0bd9570198b5626fc6bd7d0f55d7b989395b25ba"
-        }
-      }
-    }
   }
 }
