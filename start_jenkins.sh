@@ -2,10 +2,10 @@
 
 VAULT_ADDR=https://vault.service.lhr.consul:8200
 echo "Assuming Vault binary doesn't exist, download it"
-curl --retry -o vault.zip https://releases.hashicorp.com/vault/0.7.0/vault_0.7.0_linux_arm.zip && yes | unzip vault.zip 
+curl --retry 3 -o vault.zip https://releases.hashicorp.com/vault/0.7.0/vault_0.7.0_linux_arm.zip && yes | unzip vault.zip 
 echo "Get GitHub PAN from Vault"
 GITHUB_PAN=$(./vault read -field=pan secret/github)
-export JENKINS_HOME=/alloc/data
+export JENKINS_HOME=/alloc/data/jenkins
 JENKINS_ARGS="--httpPort=$HTTP_PORT"
 VERSION=${JENKINS_VERSION:-"2.46.2"}
 URL="http://ftp-chi.osuosl.org/pub/jenkins/war-stable/${VERSION}/jenkins.war"
