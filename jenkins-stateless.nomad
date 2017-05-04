@@ -18,7 +18,7 @@ job "jenkins-beta" {
         HTTP_PORT = 8087
       }
       vault {
-        policies = ["github", "default"]
+        policies = ["github"]
 
         change_mode   = "noop"
       }
@@ -31,7 +31,7 @@ job "jenkins-beta" {
         source = "https://raw.githubusercontent.com/ncorrare/jenkins-stateless/master/start_jenkins.sh"
 
         options {
-          checksum = "sha256:97ab7d9ae31e2fde9fbf4f033d917d401f7c96222be9dbf607879b5d6bd0bcfe"
+          checksum = "sha256:2a20a243ea054c10572ecd150fa9fec1e4e2b17ccfb7f147d3dfdebf9db5d446"
         }
       }
       service {
