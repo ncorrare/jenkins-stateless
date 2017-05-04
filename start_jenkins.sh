@@ -1,10 +1,10 @@
 #!/bin/bash
 
 VAULT_ADDR=https://vault.service.lhr.consul:8200
-echo "If Vault binary doesn't exist, download it"
-which vault || curl -o vault.zip https://releases.hashicorp.com/vault/0.7.0/vault_0.7.0_linux_arm.zip && yes | unzip vault.zip && mv vault /bin/vault
+echo "Assuming Vault binary doesn't exist, download it"
+curl -o vault.zip https://releases.hashicorp.com/vault/0.7.0/vault_0.7.0_linux_arm.zip && yes | unzip vault.zip 
 echo "Get GitHub PAN from Vault"
-GITHUB_PAN=$(vault read -field=pan secret/github)
+GITHUB_PAN=$(./vault read -field=pan secret/github)
 export JENKINS_HOME=/alloc/data
 JENKINS_ARGS="--httpPort=$HTTP_PORT"
 VERSION=${JENKINS_VERSION:-"2.46.2"}
