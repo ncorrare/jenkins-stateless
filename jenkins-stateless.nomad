@@ -31,7 +31,7 @@ job "jenkins-beta" {
         source = "https://raw.githubusercontent.com/ncorrare/jenkins-stateless/master/start_jenkins.sh"
 
         options {
-          checksum = "sha256:ce58f43c131f478afa1bb3cf05776143c5c5c7fe5399cf59d62272b845f76230"
+          checksum = "sha256:845968aabd63735235b3758bdeffb6c9f969f0fb4c2bc3f64dda61decb8e92bb"
         }
       }
       service {
