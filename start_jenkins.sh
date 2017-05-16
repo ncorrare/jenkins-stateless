@@ -12,9 +12,7 @@ VERSION=${JENKINS_VERSION:-"2.46.2"}
 URL="http://ftp-chi.osuosl.org/pub/jenkins/war-stable/${VERSION}/jenkins.war"
 ARGS=${JAVA_ARGS:-"-Xmx768m -Xms384m"}
 echo "Prepare Jenkins Home"
-rm -rf ${JENKINS_HOME}
-mkdir ${JENKINS_HOME}
-git clone https://${GITHUB_PAN}@github.com/ncorrare/jenkins-config.git ${JENKINS_HOME}
+test -d ${JENKINS_HOME}/.git || rm -rf ${JENKINS_HOME} && mkdir ${JENKINS_HOME} && git clone https://${GITHUB_PAN}@github.com/ncorrare/jenkins-config.git ${JENKINS_HOME}
 echo "Get Jenkins WAR"
 curl -o /tmp/jenkins.war ${URL}
 
